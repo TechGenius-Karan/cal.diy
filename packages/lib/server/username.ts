@@ -57,11 +57,12 @@ export const isPremiumUserName = IS_PREMIUM_USERNAME_ENABLED
 
 export const generateUsernameSuggestion = async (users: string[], username: string) => {
   const limit = username.length < 2 ? 9999 : 999;
+  const padWidth = limit.toString().length;
   let rand = 1;
-  while (users.includes(username + String(rand).padStart(4 - rand.toString().length, "0"))) {
+  while (users.includes(username + String(rand).padStart(padWidth, "0"))) {
     rand = Math.ceil(1 + Math.random() * (limit - 1));
   }
-  return username + String(rand).padStart(4 - rand.toString().length, "0");
+  return username + String(rand).padStart(padWidth, "0");
 };
 
 const processResult = (
